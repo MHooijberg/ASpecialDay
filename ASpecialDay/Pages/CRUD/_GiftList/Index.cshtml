@@ -1,0 +1,31 @@
+﻿@page
+@model ASpecialDay.Pages.CRUD._GiftList.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.GiftList) {
+        <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.InviteCode">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.InviteCode">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.InviteCode">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
