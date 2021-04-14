@@ -1,0 +1,33 @@
+@media (max-width: 576px)
+{
+    #defaultNavigation {
+        display: block;
+    }
+
+    #bigScreenNavigation {
+        display: none;
+    }
+
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    .collapsed {
+        display: inline-block;
+    }
+}
+@media (min-width: 576px)
+{
+    #defaultNavigation {
+        display: none;
+    }
+
+    #bigScreenNavigation {
+        display: flex;
+    }
+}
+
+.nav {
+    height: 100vh;
+}

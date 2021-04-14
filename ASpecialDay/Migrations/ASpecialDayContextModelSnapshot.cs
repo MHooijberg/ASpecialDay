@@ -94,11 +94,11 @@ namespace ASpecialDay.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GiftInviteCode")
-                        .HasColumnType("int");
+                    b.Property<string>("GiftInviteCode")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("GiftListInviteCode")
-                        .HasColumnType("int");
+                    b.Property<string>("GiftListInviteCode")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("GiftPosition")
                         .HasColumnType("int");
@@ -114,13 +114,13 @@ namespace ASpecialDay.Migrations
 
                     b.HasIndex("GiftInviteCode", "GiftPosition");
 
-                    b.ToTable("BoughtBy");
+                    b.ToTable("Boughts");
                 });
 
             modelBuilder.Entity("ASpecialDay.Models.Gift", b =>
                 {
-                    b.Property<int>("InviteCode")
-                        .HasColumnType("int");
+                    b.Property<string>("InviteCode")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Position")
                         .HasColumnType("int");
@@ -143,10 +143,8 @@ namespace ASpecialDay.Migrations
 
             modelBuilder.Entity("ASpecialDay.Models.GiftList", b =>
                 {
-                    b.Property<int>("InviteCode")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("InviteCode")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BrideId")
                         .HasColumnType("nvarchar(450)");
@@ -173,11 +171,11 @@ namespace ASpecialDay.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GiftListInviteCode")
-                        .HasColumnType("int");
+                    b.Property<string>("GiftListInviteCode")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("InviteCode")
-                        .HasColumnType("int");
+                    b.Property<string>("InviteCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
@@ -214,8 +212,8 @@ namespace ASpecialDay.Migrations
                     b.Property<int>("GuestsGuestID")
                         .HasColumnType("int");
 
-                    b.Property<int>("GiftsInviteCode")
-                        .HasColumnType("int");
+                    b.Property<string>("GiftsInviteCode")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("GiftsPosition")
                         .HasColumnType("int");

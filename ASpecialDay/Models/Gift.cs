@@ -15,7 +15,7 @@ namespace ASpecialDay.Models
         }
 
         [ForeignKey("GiftList")]
-        public int InviteCode { get; set; }
+        public string InviteCode { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

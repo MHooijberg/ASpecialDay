@@ -1,7 +1,10 @@
+using ASpecialDay.Areas.Identity;
 using ASpecialDay.Areas.Identity.Data;
+using ASpecialDay.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,8 +34,8 @@ namespace ASpecialDay
                 options.UseSqlServer(Configuration.GetConnectionString("ASpecialDayContextConnection")));
 
             services.AddDefaultIdentity<Bride>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ASpecialDayContext>();
-
+                .AddEntityFrameworkStores<ASpecialDayContext>()
+                .AddInviteTokenProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,132 @@
+﻿@page "{InviteCode?}"
+@model ASpecialDay.Pages.GiftListModel
+@{
+    ViewData["Title"] = "GiftList";
+}
+@section StyleSheets {
+    <link rel="stylesheet" href="~/css/gift-list.css" />
+}
+<!-- Content -->
+<div class="container-fluid h-100 p-0 m-0">
+    <div class="row h-100 p-0 m-0">
+        <div class="col-sm-6 h-100 p-0">
+            <span class="wedding-picture h-100 w-100"></span>
+            <div class="fixed-bottom position-absolute border-top border-warning p-3"
+                 style="background-color: rgba(255, 255, 255, 0.65); clip-path: polygon(0 0, 82.5% 0, 100% 100%, 0 100%);">
+                <div class="row">
+                    <div class="col">
+                        <h4>You've been invited to Sara and Amber their wedding.</h4>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            Sarah and Amber have invited you to join their wedding,
+                            on this page you will find the wedding info as well as a list of gifts they
+                            wish to have. You can cross off the gift you wish to give and leave contact info of
+                            you and other participants who'd like to buy the gift together with you.
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <h5>Wedding Information:</h5>
+                        </div>
+                        <div class="row">
+                            <ul class="p-0" style="list-style: none;">
+                                <li><i class="far fa-calendar-alt text-warning mr-2"></i>24.04.2021</li>
+                                <li><i class="far fa-clock text-warning mr-2"></i>16:30</li>
+                                <li><i class="fas fa-map-marker text-warning mr-2"></i>Level 1, Boulevard Tower</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-sm-6 h-100 justify-content-center">
+            <div class="my-auto col-10">
+                <div id="add-gift-container" class="mb-2 p-2 border border-secondary rounded bg-white">
+                    <div class="row vertically-center">
+                        <div class="col-3">
+                            <label class="h5 form-text form-label d-inline-block" for="giftNameInput">
+                                Gift
+                                Name:
+                            </label>
+                        </div>
+                        <div class="col-6">
+                            <input id="giftNameInput" class="form-control d-inline-block form-text" type="text" />
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-outline-secondary form-text d-inline-block">
+                                Add
+                                Gift
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="gift-list" class="list-group">
+                    <div class="list-group-item">
+                        <h5 class="d-inline">Some item name 1</h5>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="list-group-item">
+                        <h5 class="d-inline">Some item name 2</h5>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="list-group-item">
+                        <h5 class="d-inline">Some item name 3</h5>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="list-group-item">
+                        <h5 class="d-inline">Some item name 4</h5>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="list-group-item">
+                        <h5 class="d-inline">Some item name 5</h5>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                        <button class="d-inline float-right">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

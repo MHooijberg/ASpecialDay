@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ASpecialDay.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ASpecialDay.Areas.Identity.Pages.Account
 {
@@ -24,17 +26,20 @@ namespace ASpecialDay.Areas.Identity.Pages.Account
         private readonly UserManager<Bride> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ASpecialDayContext _context;
 
         public RegisterModel(
             UserManager<Bride> userManager,
             SignInManager<Bride> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ASpecialDayContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -46,6 +51,19 @@ namespace ASpecialDay.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Couple Name")]
+            public string UserName { get; set; }
+
+            [Required]
+            [Display(Name = "Wedding Location")]
+            public string Location { get; set; }
+
+            [Required]
+            [DataType(DataType.DateTime)]
+            [Display(Name = "Wedding Date")]
+            public DateTime Date { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -75,34 +93,61 @@ namespace ASpecialDay.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Bride { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
+                var user = new Bride {
+                    UserName = Input.UserName,
+                    Email = Input.Email
+                };
+                var wedding = new Wedding {
+                    Location = Input.Location,
+                    Date = Input.Date
+                };
+
+                // TODO: Simplify the wedding add checker.
+                //var weddingResult = _context.Weddings.FirstOrDefault(x => x.WeddingID == _context.Weddings.Add(wedding).Entity.WeddingID);
+                var weddingResult = await _context.Weddings.AddAsync(wedding);
+                await _context.SaveChangesAsync();
+
+                user.WeddingID = weddingResult.Entity.WeddingID;
+                var userResult = await _userManager.CreateAsync(user, Input.Password);
+
+                if (userResult.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("User created a new wedding");
+                    _logger.LogInformation("User created a new account with password and wedding ID");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    var giftList = new GiftList
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
+                        Bride = await _userManager.FindByEmailAsync(user.Email),
+                        InviteCode = await _userManager.GenerateUserTokenAsync(user, "InviteCodeTokenProvider", "InviteCode")
+                    };
+                    var giftListResult = await _context.GiftLists.AddAsync(giftList);
+                    await _context.SaveChangesAsync();
+
+                    if (!String.IsNullOrEmpty(giftListResult.Entity.Bride.Id))
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                            protocol: Request.Scheme);
+
+                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        {
+                            return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
                     }
                 }
-                foreach (var error in result.Errors)
+                foreach (var error in userResult.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }

@@ -10,8 +10,8 @@ namespace ASpecialDay.Models
 {
     public class GiftList
     {
-        [Key]
-        public int InviteCode { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string InviteCode { get; set; }
 
         public virtual Bride Bride { get; set; }
         public virtual ICollection<Gift> Gifts { get; set; }

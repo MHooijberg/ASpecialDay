@@ -1,9 +1,93 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] | A SpecialDay</title>
+
+    <!-- Font Awesome 5.7 Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="~/css/global.css">
+    @RenderSection("StyleSheets", required: false);
+
+</head>
+<body>
+    <div class="" id="navigation-container">
+        <div class="container-fluid p-0 navbar-light" id="defaultNavigation">
+            <button class="navbar-toggler m-1 float-right collapsed" type="button" data-toggle="collapse" data-target="#defaultNavigationToggle" aria-controls="defaultNavigationToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="defaultNavigationToggle">
+                <ul class="nav flex-column justify-content-center align-items-center">
+                    <li class="nav-item m-5 p-4">
+                        <a class="navbar-brand">Happy Brides</a>
+                    </li>
+                    <li class="nav-item p-2 active">
+                        <a class="nav-link" href="~/index.html#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link" href="~/index.html#hdiw-container">How Does It Work</a>
+                    </li>
+                    <li class="nav-item p-2">
+                        <a class="nav-link" href="~/index.html#about-container">About</a>
+                    </li>
+
+                    <partial name="_LoginPartial" />
+                </ul>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand navbar-light bg-transparent fixed-top border-bottom border-warning" id="bigScreenNavigation">
+            <a class="navbar-brand" href="#">Happy Brides</a>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="~/index.html#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/index.html#hdiw-container">How Does It Work</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/index.html#about-container">About</a>
+                </li>
+                <li class="nav-item">
+                    <!-- TODO: Make sure it also works from the register page -->
+                    <form asp-area="Pages" asp-page="~/GiftList" method="get">
+                        <div class="form-inline">
+                            <input class="form-control" type="search" name="InviteCode" placeholder="Invite Code..." />
+                            <button class="btn btn-outline-warning ml-2" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </li>
+                <partial name="_LoginPartial" />
+            </ul>
+        </nav>
+    </div>
+    @RenderBody()
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ASpecialDay</title>
+    <title> - ASpecialDay</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -32,7 +116,6 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
         </main>
     </div>
 
@@ -46,6 +129,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
 </html>
+-->

@@ -1,0 +1,154 @@
+html,
+body {
+  height: 100vh;
+  background-image: url(../img/Hartjes.png);
+  background-size: 15%;
+}
+
+.wedding-picture {
+  position: absolute;
+  background-image: url(../img/marriage-couple-example.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 80%;
+  background-position-y: 65%;
+  clip-path: polygon(0 0, 100% 0, 70% 40%, 100% 100%, 0 100%);
+}
+
+/*
+#gift-list > div:first-child > button:nth-child(3),
+#gift-list > div:last-child > button:nth-child(2) {
+  display: none !important;
+}
+*/
+
+/* .content {
+  overflow: overlay;
+}
+
+.content,
+.content > div,
+.content > div > div {
+  height: 100vh;
+}
+
+.seperator {
+  border-radius: 50%;
+  width: 3px;
+  background-color: black;
+}
+
+#gift-list {
+  color: black;
+  z-index: 3;
+}
+
+#gift-list * {
+  font-size: 3vh !important;
+}
+
+#gift-list > .row { */
+/* max-height: 80vh; */
+/* }
+
+.gift-row {
+  height: 5vh;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.gift-row > * {
+  display: inline-block;
+}
+
+.pill {
+  width: 4px;
+  border-radius: 2px;
+  background-color: goldenrod;
+  height: 100%;
+  margin-right: 3px;
+}
+
+.gift-box {
+  width: calc(100% - 7px);
+  border: 1px solid black;
+}
+
+.gift-box > * {
+  display: inline-block;
+}
+
+.gift-thumbnail {
+}
+
+.gift-name {
+}
+
+.gift-price {
+}
+
+.gift-button {
+  height: 3vh;
+  width: 3vh;
+}
+
+.gift-info {
+  display: none;
+  width: 100%;
+  background-color: #bbbbbb;
+  border: 1px solid black;
+  padding: 15px;
+} */
+
+/* ==== TODO: ==== */
+/* Make it responsive for multiple screen sizes */
+/* .wedding-info {
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 3;
+  width: 120%;
+  height: 20vh;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid gold;
+  padding-right: 12%;
+  clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+}
+.polygon {
+  position: absolute;
+  height: 100vh;
+  width: 120%;
+  background-image: url(../Images/marriage-couple-example.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 80%;
+  background-position-y: 65%;
+  clip-path: polygon(0 0, 100% 0, 70% 40%, 100% 100%, 0 100%);
+}
+.gift-info p {
+  white-space: normal;
+}
+.wedding-info > div {
+  text-align: center;
+}
+.wedding-info > div > i {
+  display: block;
+}
+
+.wedding-info ul {
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.wedding-info li {
+  text-align: left;
+}
+
+.wedding-info i {
+  margin: 5px;
+} */
+
+/*
+    background-color: blue;
+    height: 100vh;
+    position: absolute;
+    */

@@ -19,6 +19,9 @@
 
   <ItemGroup>
     <Folder Include="Pages\CRUD\_Bride\" />
+    <Folder Include="Pages\CRUD\_GiftList\" />
+    <Folder Include="Pages\CRUD\_Gift\" />
+    <Folder Include="Pages\CRUD\_Guest\" />
   </ItemGroup>
 
 </Project>

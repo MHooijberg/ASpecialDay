@@ -17,10 +17,11 @@ namespace ASpecialDay.Areas.Identity.Data
         public DbSet<Gift> Gifts { get; set; }
         public DbSet<Guest> Guests { get; set; }
         public DbSet<Wedding> Weddings { get; set; }
-        //public DbSet<BoughtBy> Boughts { get; set; }
+        public DbSet<BoughtBy> Boughts { get; set; }
         public ASpecialDayContext(DbContextOptions<ASpecialDayContext> options)
                 : base(options)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -30,7 +31,7 @@ namespace ASpecialDay.Areas.Identity.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
             builder.Entity<Gift>()
-                .HasKey(g => new { g.InviteCode, g.Position });            
+                .HasKey(g => new { g.InviteCode, g.Position });
         }
     }
 }
