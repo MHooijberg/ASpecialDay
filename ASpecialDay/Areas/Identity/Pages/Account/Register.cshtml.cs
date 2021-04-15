@@ -94,7 +94,8 @@ namespace ASpecialDay.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new Bride {
-                    UserName = Input.UserName,
+                    // TODO: Edit back to username
+                    UserName = Input.Email,
                     Email = Input.Email
                 };
                 var wedding = new Wedding {

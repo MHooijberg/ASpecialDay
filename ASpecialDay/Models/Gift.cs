@@ -17,11 +17,13 @@ namespace ASpecialDay.Models
         [ForeignKey("GiftList")]
         public string InviteCode { get; set; }
         [Required]
+        [Display(Name = "Giftname")]
         public string Name { get; set; }
-        [Required]
-        public string Description { get; set; }        
-        public int Position { get; set; }
-        public bool IsBought { get; set; }
+        //[Required]
+        public string? Description { get; set; }
+        [Range(0, 1000)]
+        public int? Position { get; set; }
+        public bool? IsBought { get; set; }
         public virtual ICollection<Guest> Guests { get; set; }
     }
 }

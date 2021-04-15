@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ASpecialDay.Areas.Identity.Data;
 using ASpecialDay.Models;
 
-namespace ASpecialDay.Pages.CRUD._Wedding
+namespace ASpecialDay.Pages.CRUD._GiftList
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,11 @@ namespace ASpecialDay.Pages.CRUD._Wedding
             _context = context;
         }
 
-        public IList<Wedding> Wedding { get;set; }
+        public IList<GiftList> GiftList { get;set; }
 
         public async Task OnGetAsync()
         {
-            Wedding = await _context.Weddings.ToListAsync();
+            GiftList = await _context.GiftLists.ToListAsync();
         }
     }
 }

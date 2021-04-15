@@ -17,7 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="~/css/global.css">
-    @RenderSection("StyleSheets", required: false);
+    @RenderSection("StyleSheets", required: false)
 
 </head>
 <body>
@@ -41,7 +41,14 @@
                     <li class="nav-item p-2">
                         <a class="nav-link" href="~/index.html#about-container">About</a>
                     </li>
-
+                    <li>
+                        <form asp-page="./GiftList" method="get">
+                            <div class="form-inline">
+                                <input class="form-control" type="search" name="inviteCode" placeholder="Invite Code..." />
+                                <button class="btn btn-outline-warning ml-2" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </li>
                     <partial name="_LoginPartial" />
                 </ul>
             </div>
@@ -60,7 +67,7 @@
                 </li>
                 <li class="nav-item">
                     <!-- TODO: Make sure it also works from the register page -->
-                    <form asp-area="Pages" asp-page="~/GiftList" method="get">
+                    <form asp-page="./GiftList" method="get">
                         <div class="form-inline">
                             <input class="form-control" type="search" name="InviteCode" placeholder="Invite Code..." />
                             <button class="btn btn-outline-warning ml-2" type="submit"><i class="fas fa-search"></i></button>
@@ -79,57 +86,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> - ASpecialDay</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ASpecialDay</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - ASpecialDay - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    
-</body>
-</html>
--->

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ASpecialDay.Areas.Identity.Data;
 using ASpecialDay.Models;
 
-namespace ASpecialDay.Pages.CRUD._Wedding
+namespace ASpecialDay.Pages.CRUD._GiftList
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace ASpecialDay.Pages.CRUD._Wedding
         }
 
         [BindProperty]
-        public Wedding Wedding { get; set; }
+        public GiftList GiftList { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -35,7 +35,7 @@ namespace ASpecialDay.Pages.CRUD._Wedding
                 return Page();
             }
 
-            _context.Weddings.Add(Wedding);
+            _context.GiftLists.Add(GiftList);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

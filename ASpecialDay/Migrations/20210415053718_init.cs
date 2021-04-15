@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASpecialDay.Migrations
 {
-    public partial class ComplexDataModel : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -192,8 +192,8 @@ namespace ASpecialDay.Migrations
                     InviteCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Position = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsBought = table.Column<bool>(type: "bit", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsBought = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,4 +1,8 @@
-﻿@page "{InviteCode?}"
+﻿@page "{inviteCode?}"
+@using Microsoft.AspNetCore.Identity
+@using ASpecialDay.Areas.Identity.Data
+@inject SignInManager<Bride> SignInManager
+@inject UserManager<Bride> UserManager
 @model ASpecialDay.Pages.GiftListModel
 @{
     ViewData["Title"] = "GiftList";
@@ -44,86 +48,125 @@
             </div>
         </div>
         <div class="row col-sm-6 h-100 justify-content-center">
-            <div class="my-auto col-10">
-                <div id="add-gift-container" class="mb-2 p-2 border border-secondary rounded bg-white">
-                    <div class="row vertically-center">
-                        <div class="col-3">
-                            <label class="h5 form-text form-label d-inline-block" for="giftNameInput">
-                                Gift
-                                Name:
-                            </label>
+            <div class="col-12 my-auto">
+                <div class="row">
+                    <div class="col-10">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <!-- TODO: Add Validation -->
+                            <h3>Add A Wedding Gift:</h3>
+                            <div id="add-gift-container" class="mb-2 p-2 border border-secondary rounded bg-white">
+                                <div class="row vertically-center p-0">
+                                    <form class="form-inline col-12 p-0" method="post" asp-page-handler="AddGift">
+                                        <div class="form-group row col-12">
+                                            <div class="col-2">
+                                                <label class="h5" asp-for="NewGift.Name"></label>
+                                            </div>
+                                            <div class="col-9">
+                                                <input asp-for="NewGift.Name" class="form-control form-text w-100" typeof="text" required />
+                                            </div>
+                                            <div class="col-1">
+                                                <button class="btn btn-outline-secondary" type="submit">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="hidden" asp-for="InviteCode" value="@Model.InviteCode" />
+                                            <span asp-validation-for="NewGift.Name" class="text-danger"></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                        <div id="gift-list" class="list-group">
+                            <h3>Wedding Gifts Wishlist:</h3>
+                            @if (Model._GiftList.Gifts != null)
+                            {
+                                @foreach (var gift in Model._GiftList.Gifts.Where(gift => gift.IsBought == false))
+                                {
+                                    <div class="list-group-item">
+                                        <h5 class="d-inline">@gift.Name</h5>
+
+                                        @if (SignInManager.IsSignedIn(User))
+                                        {
+                                            <form method="post" asp-page-handler="MoveDown" asp-route-gift="@gift">
+                                                <button class="d-inline float-right">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                </button>
+                                            </form>
+                                            <form method="post" asp-page-handler="MoveUp" asp-route-gift="@gift">
+                                                <button class="d-inline float-right">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                </button>
+                                            </form>
+                                            <form method="post" asp-page-handler="Delete" asp-route-gift="@gift">
+                                                <button class="d-inline float-right">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <!-- TODO: Make popup dialog to add participants -->
+                                            <form method="post" asp-page-handler="">
+                                                <button class="d-inline float-right">
+                                                    <i class="fas fa-check-square"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="mb-2 p-2 border border-danger rounded bg-white">
+                                    <div class="row vertically-center px-3">
+                                        <div class="col-12 text-center">
+                                            <h4>No gifts have been added to the list, the list is currently empty.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
-                        <div class="col-6">
-                            <input id="giftNameInput" class="form-control d-inline-block form-text" type="text" />
-                        </div>
-                        <div class="col-3">
-                            <button class="btn btn-outline-secondary form-text d-inline-block">
-                                Add
-                                Gift
-                            </button>
-                        </div>
+                        <!-- TODO: Add Crossed-Off Gift List -->
                     </div>
                 </div>
-                <div id="gift-list" class="list-group">
-                    <div class="list-group-item">
-                        <h5 class="d-inline">Some item name 1</h5>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-down"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-up"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                    <div class="list-group-item">
-                        <h5 class="d-inline">Some item name 2</h5>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-down"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-up"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                    <div class="list-group-item">
-                        <h5 class="d-inline">Some item name 3</h5>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-down"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-up"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                    <div class="list-group-item">
-                        <h5 class="d-inline">Some item name 4</h5>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-down"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-up"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                    <div class="list-group-item">
-                        <h5 class="d-inline">Some item name 5</h5>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-down"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-arrow-up"></i>
-                        </button>
-                        <button class="d-inline float-right">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                <div class="row">
+                    <div class="col-10">
+                        <h3>Crossed-Off Gifts</h3>
+                        <div class="list-group">
+                            @if (Model._GiftList.Gifts != null)
+                            {
+                                @foreach (var gift in Model._GiftList.Gifts.Where(gift => gift.IsBought == true))
+                                {
+                                    <div class="list-group-item">
+                                        <h5 class="d-inline">@gift.Name</h5>
+
+                                        @if (SignInManager.IsSignedIn(User))
+                                        {
+                                            <form method="post" asp-page-handler="Delete" asp-route-gift="@gift">
+                                                <button class="d-inline float-right">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="mb-2 p-2 border border-danger rounded bg-white">
+                                    <div class="row vertically-center px-3">
+                                        <div class="col-12 text-center">
+                                            <h4>No gifts have been crossed-off from list.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

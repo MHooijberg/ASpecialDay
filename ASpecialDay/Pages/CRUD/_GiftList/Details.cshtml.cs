@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ASpecialDay.Areas.Identity.Data;
 using ASpecialDay.Models;
 
-namespace ASpecialDay.Pages.CRUD._Wedding
+namespace ASpecialDay.Pages.CRUD._GiftList
 {
     public class DetailsModel : PageModel
     {
@@ -19,18 +19,18 @@ namespace ASpecialDay.Pages.CRUD._Wedding
             _context = context;
         }
 
-        public Wedding Wedding { get; set; }
+        public GiftList GiftList { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Wedding = await _context.Weddings.FirstOrDefaultAsync(m => m.WeddingID == id);
+            GiftList = await _context.GiftLists.FirstOrDefaultAsync(m => m.InviteCode == id);
 
-            if (Wedding == null)
+            if (GiftList == null)
             {
                 return NotFound();
             }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASpecialDay.Migrations
 {
     [DbContext(typeof(ASpecialDayContext))]
-    [Migration("20210414160736_ComplexDataModel")]
-    partial class ComplexDataModel
+    [Migration("20210415053718_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -124,14 +124,13 @@ namespace ASpecialDay.Migrations
                     b.Property<string>("InviteCode")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Position")
+                    b.Property<int?>("Position")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsBought")
+                    b.Property<bool?>("IsBought")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")

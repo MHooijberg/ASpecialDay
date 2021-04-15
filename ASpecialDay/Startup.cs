@@ -34,8 +34,8 @@ namespace ASpecialDay
                 options.UseSqlServer(Configuration.GetConnectionString("ASpecialDayContextConnection")));
 
             services.AddDefaultIdentity<Bride>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ASpecialDayContext>()
-                .AddInviteTokenProvider();
+                .AddEntityFrameworkStores<ASpecialDayContext>();
+                //.AddInviteTokenProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

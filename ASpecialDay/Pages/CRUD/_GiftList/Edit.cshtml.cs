@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using ASpecialDay.Areas.Identity.Data;
 using ASpecialDay.Models;
 
-namespace ASpecialDay.Pages.CRUD._Wedding
+namespace ASpecialDay.Pages.CRUD._GiftList
 {
     public class EditModel : PageModel
     {
@@ -21,18 +21,18 @@ namespace ASpecialDay.Pages.CRUD._Wedding
         }
 
         [BindProperty]
-        public Wedding Wedding { get; set; }
+        public GiftList GiftList { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Wedding = await _context.Weddings.FirstOrDefaultAsync(m => m.WeddingID == id);
+            GiftList = await _context.GiftLists.FirstOrDefaultAsync(m => m.InviteCode == id);
 
-            if (Wedding == null)
+            if (GiftList == null)
             {
                 return NotFound();
             }
@@ -48,7 +48,7 @@ namespace ASpecialDay.Pages.CRUD._Wedding
                 return Page();
             }
 
-            _context.Attach(Wedding).State = EntityState.Modified;
+            _context.Attach(GiftList).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace ASpecialDay.Pages.CRUD._Wedding
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!WeddingExists(Wedding.WeddingID))
+                if (!GiftListExists(GiftList.InviteCode))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,9 @@ namespace ASpecialDay.Pages.CRUD._Wedding
             return RedirectToPage("./Index");
         }
 
-        private bool WeddingExists(int id)
+        private bool GiftListExists(string id)
         {
-            return _context.Weddings.Any(e => e.WeddingID == id);
+            return _context.GiftLists.Any(e => e.InviteCode == id);
         }
     }
 }

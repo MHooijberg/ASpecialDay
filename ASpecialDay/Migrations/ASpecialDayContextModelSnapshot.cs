@@ -122,14 +122,13 @@ namespace ASpecialDay.Migrations
                     b.Property<string>("InviteCode")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Position")
+                    b.Property<int?>("Position")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsBought")
+                    b.Property<bool?>("IsBought")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ASpecialDay.Areas.Identity.Data;
 using ASpecialDay.Models;
 
-namespace ASpecialDay.Pages.CRUD._Wedding
+namespace ASpecialDay.Pages.CRUD._GiftList
 {
     public class DeleteModel : PageModel
     {
@@ -20,36 +20,36 @@ namespace ASpecialDay.Pages.CRUD._Wedding
         }
 
         [BindProperty]
-        public Wedding Wedding { get; set; }
+        public GiftList GiftList { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Wedding = await _context.Weddings.FirstOrDefaultAsync(m => m.WeddingID == id);
+            GiftList = await _context.GiftLists.FirstOrDefaultAsync(m => m.InviteCode == id);
 
-            if (Wedding == null)
+            if (GiftList == null)
             {
                 return NotFound();
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Wedding = await _context.Weddings.FindAsync(id);
+            GiftList = await _context.GiftLists.FindAsync(id);
 
-            if (Wedding != null)
+            if (GiftList != null)
             {
-                _context.Weddings.Remove(Wedding);
+                _context.GiftLists.Remove(GiftList);
                 await _context.SaveChangesAsync();
             }
 
